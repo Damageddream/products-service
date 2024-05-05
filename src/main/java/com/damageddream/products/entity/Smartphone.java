@@ -1,17 +1,17 @@
 package com.damageddream.products.entity;
 
+import com.damageddream.products.entity.enums.Accessories;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @PrimaryKeyJoinColumn(name = "smartphone_id")
 public class Smartphone extends Product {

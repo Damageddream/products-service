@@ -1,4 +1,4 @@
-package com.damageddream.products.entity;
+package com.damageddream.products.entity.enums;
 
 public enum Accessories {
     SCREEN_PROTECTOR,
