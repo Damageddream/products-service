@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface ProductService {
     List<ProductDTO> findAll();
+    List<ProductDTO> findElectronics();
     ProductDTO findById(Long id);
     ProductDTO save(ProductDTO productDTO);
     ProductDTO update(Long id, ProductDTO productDTO);

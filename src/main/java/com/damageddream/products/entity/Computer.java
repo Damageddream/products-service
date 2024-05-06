@@ -1,8 +1,10 @@
 package com.damageddream.products.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import com.damageddream.products.entity.computerparts.CPU;
+import com.damageddream.products.entity.computerparts.GPU;
+import com.damageddream.products.entity.computerparts.RAM;
+import com.damageddream.products.entity.computerparts.Storage;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -14,8 +16,16 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @PrimaryKeyJoinColumn(name = "computer_id")
 public class Computer extends Product{
-    private String cpu;
-    private String gpu;
-    private String ram;
-    private String storage;
+    @ManyToOne
+    @JoinColumn(name = "cpu_id")
+    private CPU cpu;
+    @ManyToOne
+    @JoinColumn(name = "gpu_id")
+    private GPU gpu;
+    @ManyToOne
+    @JoinColumn(name = "ram_id")
+    private RAM ram;
+    @ManyToOne
+    @JoinColumn(name = "storage_id")
+    private Storage storage;
 }
