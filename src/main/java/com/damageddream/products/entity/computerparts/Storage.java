@@ -16,4 +16,5 @@ public class Storage {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String name;
+    //comment
 }
