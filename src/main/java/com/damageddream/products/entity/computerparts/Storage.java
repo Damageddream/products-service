@@ -17,4 +17,5 @@ public class Storage {
     private Long id;
     private String name;
     //comment
+    //test
 }
