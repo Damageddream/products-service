@@ -7,20 +7,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String name;
     private Double price;
     @Enumerated(EnumType.STRING)
     private ProductTypes productType;
+    private boolean isVisibleToSell;
+    @ManyToMany
+    private Set<Product> configurations;
+    @ManyToMany
+    private Set<Product> possibleConfigurations;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -15,14 +15,10 @@ public class ProductRestController {
     private final ProductService productService;
 
     @GetMapping
-    public List<ProductDTO> findAll() {
-        return productService.findAll();
+    public List<ProductDTO> findAll(@RequestParam String productType) {
+        return productService.findAll(productType);
     }
 
-    @GetMapping("/electronics")
-    public List<ProductDTO> findElectronics() {
-        return productService.findElectronics();
-    }
 
     @GetMapping("/{id}")
     public ProductDTO findById(@PathVariable Long id) {

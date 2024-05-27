@@ -21,17 +21,9 @@ public class ProductServiceImpl implements ProductService {
     private final DataValidator dataValidator;
 
     @Override
-    public List<ProductDTO> findAll() {
+    public List<ProductDTO> findAll(String productType) {
         List<Product> products = productRepository.findAll();
         return products.stream()
-                .map(productMapper::toDTO)
-                .toList();
-    }
-
-    @Override
-    public List<ProductDTO> findElectronics() {
-        List<Product> electronics = productRepository.findByProductType(ProductTypes.ELECTRONIC);
-        return electronics.stream()
                 .map(productMapper::toDTO)
                 .toList();
     }
