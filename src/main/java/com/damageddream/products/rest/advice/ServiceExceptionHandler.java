@@ -3,6 +3,7 @@ package com.damageddream.products.rest.advice;
 import com.damageddream.products.exception.ProductAlreadyExistsException;
 import com.damageddream.products.exception.ProductNotFoundException;
 import com.damageddream.products.exception.RequiredFieldIsNullException;
+import com.damageddream.products.exception.WrongProductTypeException;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,16 @@ public class ServiceExceptionHandler {
                 requiredFieldIsNullException.getMessage(), LocalDateTime.now());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(WrongProductTypeException.class)
+    public ResponseEntity<ErrorResponse> wrongProductTypeExceptionHandler(
+            WrongProductTypeException wrongProductTypeException) {
+
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.CONFLICT,
+                wrongProductTypeException.getMessage(), LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
     @ExceptionHandler(RuntimeException.class)
     protected ResponseEntity<ErrorResponse> handleGlobalException(
