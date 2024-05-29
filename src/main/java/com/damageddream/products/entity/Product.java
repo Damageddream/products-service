@@ -3,9 +3,9 @@ package com.damageddream.products.entity;
 import com.damageddream.products.entity.enums.ProductTypes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
@@ -13,6 +13,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +23,7 @@ public class Product {
     private Double price;
     @Enumerated(EnumType.STRING)
     private ProductTypes productType;
-    private boolean isVisibleToSell;
+    private boolean visibleToSell;
     @ManyToMany
     private Set<Product> configurations;
     @ManyToMany

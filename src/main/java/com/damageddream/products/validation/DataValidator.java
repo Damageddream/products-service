@@ -48,7 +48,6 @@ public class DataValidator {
             throw new ProductAlreadyExistsException("This configuration is already in this product");
         }
     }
-
     public void validateNewConfig(Product product, Product config){
         if(!product.getPossibleConfigurations().contains(config)){
             throw new WrongProductTypeException("This configuration cannot be added to this product");
