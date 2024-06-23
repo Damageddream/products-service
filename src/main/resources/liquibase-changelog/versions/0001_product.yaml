@@ -1,0 +1,132 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Marcin
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: price
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_type
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: visible_to_sell
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: Marcin
+      changes:
+        - createTable:
+            tableName: product_configurations
+            columns:
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: configuration_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 3
+      author: Marcin
+      changes:
+        - addPrimaryKey:
+            columnNames: product_id, configuration_id
+            tableName: product_configurations
+
+  - changeSet:
+      id: 4
+      author: Marcin
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: product_configurations
+            baseColumnNames: product_id
+            constraintName: fk_product_configurations_product
+            referencedTableName: product
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 5
+      author: Marcin
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: product_configurations
+            baseColumnNames: configuration_id
+            constraintName: fk_product_configurations_configuration
+            referencedTableName: product
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 6
+      author: Marcin
+      changes:
+        - createTable:
+            tableName: product_possible_configurations
+            columns:
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: possible_configuration_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 7
+      author: Marcin
+      changes:
+        - addPrimaryKey:
+            columnNames: product_id, possible_configuration_id
+            tableName: product_possible_configurations
+
+  - changeSet:
+      id: 8
+      author: Marcin
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: product_possible_configurations
+            baseColumnNames: product_id
+            constraintName: fk_product_possible_configurations_product
+            referencedTableName: product
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 9
+      author: Marcin
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: product_possible_configurations
+            baseColumnNames: possible_configuration_id
+            constraintName: fk_product_possible_configurations_possible_configuration
+            referencedTableName: product
+            referencedColumnNames: id
