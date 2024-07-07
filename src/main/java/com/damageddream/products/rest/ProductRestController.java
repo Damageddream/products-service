@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -133,5 +134,10 @@ public class ProductRestController {
     @DeleteMapping("/{id}/possible-config")
     public ProductDTO deletePossibleConfig(@PathVariable Long id) {
         return productService.removePossibleConfig(id);
+    }
+
+    @GetMapping("/pagination/{offset}/{pageSize}")
+    public Page<ProductDTO> getPage(@PathVariable int offset, @PathVariable int pageSize){
+        return productService.findAllWithPagination(offset, pageSize);
     }
 }

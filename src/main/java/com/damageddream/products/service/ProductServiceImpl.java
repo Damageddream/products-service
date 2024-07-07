@@ -9,6 +9,8 @@ import com.damageddream.products.exception.ProductNotFoundException;
 import com.damageddream.products.repository.ProductRepository;
 import com.damageddream.products.validation.DataValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -114,5 +116,11 @@ public class ProductServiceImpl implements ProductService {
         product.setPossibleConfigurations(null);
         productRepository.save(product);
         return productMapper.toDTO(product);
+    }
+
+    @Override
+    public Page<ProductDTO> findAllWithPagination(int offset, int pageSize) {
+        Page<Product> productPage = productRepository.findAll(PageRequest.of(offset, pageSize));
+        return productPage.map(productMapper::toDTO);
     }
 }
